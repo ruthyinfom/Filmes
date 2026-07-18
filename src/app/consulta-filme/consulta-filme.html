@@ -1,1 +1,38 @@
-<p>consulta-filme works!</p>
+<div class="pesquisa">
+
+    <h1>Consulta de Filmes</h1>
+
+    <form [formGroup]="formulario">
+        <input
+            type="text"
+            formControlName="nome"
+            placeholder="Digite o título do filme">
+
+        <button
+            type="button"
+            (click)="buscarFilmes(formulario.get('nome')?.value)">
+            Pesquisar
+        </button>
+    </form>
+
+</div>
+
+@if(listaFilmes().length > 0){
+
+<div class="lista-filmes">
+
+    @for(filme of listaFilmes(); track filme.imdbID){
+
+    <div class="card">
+        <img [src]="filme.Poster" [alt]="filme.Title">
+        <h2>{{filme.Title}}</h2>
+        <p><strong>Ano:</strong> {{filme.Year}}</p>
+        <p><strong>Tipo:</strong> {{filme.Type}}</p>
+        <p><strong>ID:</strong> {{filme.imdbID}}</p>
+    </div>
+
+    }
+
+</div>
+
+}
